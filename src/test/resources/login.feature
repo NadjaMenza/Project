@@ -1,7 +1,7 @@
 Feature: Login
   Background:
     Given I open tesco online shop
-#    And I accept cookies
+    And I accept cookies
 
   Rule: an error should appears when user uses invalid credential
 

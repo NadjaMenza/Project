@@ -3,10 +3,12 @@ package steps;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import helper.Navigation;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -22,15 +24,31 @@ public class LoginSteps {
 
     @Before
     public void setup() {
+
         Configuration.timeout = 15000;
         Configuration.browser = "chrome";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-blink-features=AutomationControlled");
+//        Configuration.browserCapabilities.setCapability("goog:chromeOptions", "--disable-blink-features=AutomationControlled");
         Selenide.open("https://bevasarlas.tesco.hu/groceries/en-GB/");
+
     }
 
     @Given("I open tesco online shop")
     public void openWebsite (){
         //homePage = new HomePage();
         homePage.isLoaded();
+//        Configuration.browserCapabilities.setCapability("goog:chromeOptions", "--disable-blink-features=AutomationControlled");
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-blink-features=AutomationControlled");
+    }
+    @And("I accept cookies")
+    public void iAcceptCookies() throws InterruptedException {
+        //SelenideElement cookieButton = $(byText("Accept all cookies"));
+        SelenideElement cookieButton = $(byXpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button"));
+        //Assertions.assertTrue(cookieButton.isEnabled());
+        cookieButton.click();
+        //Thread.sleep(15000);
     }
 
 
