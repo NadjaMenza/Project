@@ -8,9 +8,18 @@ import helper.Navigation;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 import pages.LoginPage;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -25,22 +34,36 @@ public class LoginSteps {
     @Before
     public void setup() {
 
-        Configuration.timeout = 15000;
+        // Set ChromeOptions
         Configuration.browser = "chrome";
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-blink-features=AutomationControlled");
-//        Configuration.browserCapabilities.setCapability("goog:chromeOptions", "--disable-blink-features=AutomationControlled");
+        Configuration.browserCapabilities = options;
+        // Open the webpage
         Selenide.open("https://bevasarlas.tesco.hu/groceries/en-GB/");
-
     }
+
+
+    //It works
+//    WebDriver driver;
+//    WebDriverWait wait;
+//
+//    @Before
+//    public void initializeDriver() {
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-blink-features=AutomationControlled");
+//        driver = new ChromeDriver(options);
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        driver.manage().window().maximize();
+//        driver.get("https://bevasarlas.tesco.hu/groceries/en-GB/");
+//
+//        WebElement button = driver.findElement(By.xpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button"));
+//        button.click();
+//    }
 
     @Given("I open tesco online shop")
     public void openWebsite (){
-        //homePage = new HomePage();
         homePage.isLoaded();
-//        Configuration.browserCapabilities.setCapability("goog:chromeOptions", "--disable-blink-features=AutomationControlled");
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--disable-blink-features=AutomationControlled");
     }
     @And("I accept cookies")
     public void iAcceptCookies() throws InterruptedException {
