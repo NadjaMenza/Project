@@ -16,7 +16,7 @@ Feature: Login
 
     Scenario: successful sign in
       Given I click Sign in button
-      When I enter credentials 'user@gmail.com' and '123456789'
+      When I enter credentials 'nadart911@gmail.com' and 'Masterfield2024'
       And I click on the sign in button
       Then I should see a welcome text on home page indicating successful login
 

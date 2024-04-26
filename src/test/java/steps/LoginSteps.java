@@ -102,7 +102,7 @@ public class LoginSteps {
     public void RedirectedToTheHomePage() {
         SelenideElement searchField = $(byId("search-input"));
         Assertions.assertTrue(searchField.exists());
-        SelenideElement welcomeText = $(byClassName("styled__GreetingMessage-sc-9ltfcf-1 cfKIRj"));
+        SelenideElement welcomeText = $(byTagName("h1"));
         Assertions.assertTrue(welcomeText.exists());
     }
 
