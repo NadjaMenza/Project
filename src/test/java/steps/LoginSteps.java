@@ -3,26 +3,14 @@ package steps;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import helper.Navigation;
+import pages.Navigation;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 import pages.LoginPage;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -66,12 +54,11 @@ public class LoginSteps {
         homePage.isLoaded();
     }
     @And("I accept cookies")
-    public void iAcceptCookies() throws InterruptedException {
+    public void iAcceptCookies(){
         //SelenideElement cookieButton = $(byText("Accept all cookies"));
         SelenideElement cookieButton = $(byXpath("//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button"));
         //Assertions.assertTrue(cookieButton.isEnabled());
         cookieButton.click();
-        //Thread.sleep(15000);
     }
 
 
@@ -112,10 +99,11 @@ public class LoginSteps {
         SelenideElement currentLanguage = $(byTagName("h1"));
 
         if (currentLanguage.getText().equals("Gyors és kényelmes bevásárlás")){
-            if (newLanguage.equals("hungarian")) {
+            if (newLanguage.equals("english")) {
+                languageButton.click();
             }
         }else{
-            if (newLanguage.equals("english")){
+            if (newLanguage.equals("hungarian")){
                 languageButton.click();
             }
 
@@ -136,7 +124,12 @@ public class LoginSteps {
 
     @Given("I am on the product page of online shop")
     public void navigateProductPage (){
-        navigation.navigationForSandwiches();
+
+        //rewrite test. *navidateGroseries* could be used heir (only one function)
+        //xPaths should be transfered from Gherkin
+        navigation.navigationFirstMenu("menu__link menu__link--superdepartment menu__link--active menu__link--current-parent");
+        navigation.navigationSecondMenu("menu__link menu__link--department");
+        navigation.navigationThirdMenu("menu__link menu__link--aisle");
     }
 
     @When("I click on the {string}")

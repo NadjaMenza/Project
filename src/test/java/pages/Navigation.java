@@ -1,4 +1,4 @@
-package helper;
+package pages;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -7,12 +7,18 @@ import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 
 public class Navigation {
-    public void navigationForSandwiches(){
-        SelenideElement navigationButton = $(byClassName("menu__link menu__link--superdepartment menu__link--active menu__link--current-parent"));
+    public void navigationFirstMenu(String xPath){
+        SelenideElement navigationButton = $(byClassName(xPath));
         navigationButton.click();
-        SelenideElement navigationButtonSecond = $(byClassName("menu__link menu__link--department"));
+        //add waiting
+    }
+    public void navigationSecondMenu(String xPath){
+        SelenideElement navigationButtonSecond = $(byClassName(xPath));
         navigationButtonSecond.click();
-        SelenideElement navigationButtonThird = $(byClassName("menu__link menu__link--aisle"));
+        //add waiting
+    }
+    public void navigationThirdMenu(String xPath){
+        SelenideElement navigationButtonThird = $(byClassName(xPath));
         navigationButtonThird.click();
         SelenideElement header = $(byClassName("heading query"));
         header.shouldBe(visible);
